@@ -103,6 +103,38 @@ populate(data, elements, {
 document.body.appendChild(elements.root)
 ```
 
+Compared to doign it by hand
+
+```js
+...
+
+elements.someText.textContent = data.someText
+elements.someLink.href = data.someLink
+elements.different.value = data.value
+var tmpl = elements.name.firstElementChild
+elements.name.removeChild(tmpl)
+data.name.forEach(function (text) {
+    var clone = tmpl.cloneNode(true)
+    clone.textContent = text
+    elem.appendChild(clone)
+})
+
+document.body.appendChild(elements.root)
+```
+
+You don't safe much boilerplate but what you gain is a
+    declarative description of how your data structure populates
+    the DOM. Which doubles as documenting your data structure and
+    defining how the rendering logic should be done.
+
+## Advantages
+
+ - declaratively describe your data structure
+ - declaratively describe how the DOM should be populated
+ - uses functions and recursions so is both modular and
+    composable
+ - Works nicely with streams
+
 ## Stream example
 
 ```html
