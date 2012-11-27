@@ -39,9 +39,10 @@ The above mapping placed the link into the `<a>`'s href property
 The format of an object of elements allows you to populate
     multiple elements from a single object of data.
 
-It also works cleanly with the result of `unpack-html`. However
-    using `unpack-html` is completely optional. Feel free to
-    get references to your DOM elements however you want!
+It also works cleanly with the result of [`unpack-html`][1].
+    However using [`unpack-html`][1] is completely optional.
+    Feel free to get references to your DOM elements however
+    you want!
 
 ```html
 <!-- ./template.html -->
@@ -261,3 +262,5 @@ assert.equal(elements.text.textContent, "http://google.com")
  - Raynos
 
 ## MIT Licenced
+
+  [1]: https://github.com/Raynos/unpack-html
