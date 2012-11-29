@@ -6,6 +6,6 @@ function property(property, name) {
             elem = elements[name]
         }
 
-        elem[property] = value
+        elem && elem[property] = value
     }
 }
