@@ -11,18 +11,14 @@ function populate(data, elements, mapping) {
         var value = data[prop]
             , map = mapping[prop]
 
-        if (typeof map === "object") {
-            populate(value, elements, map)
-        } else if (Array.isArray(map)) {
-            map.forEach(function () {
+        if (Array.isArray(map)) {
+            map.forEach(function (fn) {
                 fn(value, elements[prop], elements)
             })
+        } else if (typeof map === "object") {
+            populate(value, elements, map)
         } else {
             map(value, elements[prop], elements)
         }
-    }
-
-    function callFn(fn) {
-        fn(this.value, elements[this.prop], elements)
     }
 }
