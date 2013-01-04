@@ -14,7 +14,9 @@ function populate(data, elements, mapping) {
         if (typeof map === "object") {
             populate(value, elements, map)
         } else if (Array.isArray(map)) {
-            map.forEach(callFn, { prop: prop, value: value })
+            map.forEach(function () {
+                fn(value, elements[prop], elements)
+            })
         } else {
             map(value, elements[prop], elements)
         }
