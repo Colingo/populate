@@ -1,24 +1,17 @@
-var keys = Object.keys
+var fold = require("reducers/fold")
 
-module.exports = populate
+var Render = require("./render")
 
-function populate(data, elements, mapping) {
-    keys(mapping).forEach(applyMapping)
+module.exports = Schema
 
-    return elements
+function Schema(mapping) {
+    var render = Render(mapping)
 
-    function applyMapping(prop) {
-        var value = data[prop]
-            , map = mapping[prop]
+    return schema
 
-        if (Array.isArray(map)) {
-            map.forEach(function (fn) {
-                fn(value, elements[prop], elements)
-            })
-        } else if (typeof map === "object") {
-            populate(value, elements, map)
-        } else {
-            map(value, elements[prop], elements)
-        }
+    function schema(elements, input) {
+        fold(input, function (data) {
+            render(data, elements)
+        })
     }
 }

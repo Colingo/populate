@@ -17,11 +17,24 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
-    "write-stream": "~0.4.3"
+    "write-stream": "~0.4.3",
+    "reducers": "git://github.com/Raynos/reducers",
+    "dotty": "0.0.1",
+    "data-set": "~0.1.1",
+    "dom-walk": "0.0.1",
+    "deepmerge": "~0.2.5",
+    "xtend": "~1.0.3"
+  },
+  "peerDependencies": {
+    "reducible": "git://github.com/Raynos/reducible#1.x"
   },
   "devDependencies": {
     "tap": "~0.3.1",
-    "browserify-server": "~2.1.10"
+    "browserify-server": "~2.1.18",
+    "testem": "git://github.com/Raynos/testem",
+    "tape": "~0.2.2",
+    "unpack-html": "~1.0.3",
+    "reducible": "git://github.com/Raynos/reducible#1.x"
   },
   "licenses": [
     {
@@ -30,6 +43,8 @@
     }
   ],
   "scripts": {
-    "test": "tap ./test"
+    "test": "testem ci",
+    "build": "browserify-server --bundle=test/index.js -o test/static/bundle.js --debug",
+    "testem": "testem"
   }
 }
