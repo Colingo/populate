@@ -2,44 +2,25 @@ var walk = require("dom-walk")
 var DataSet = require("data-set")
 var inspect = require("util").inspect
 var dotty = require("dotty")
-var extend = require("xtend")
+var DeepMerge = require("deep-merge")
 var put = dotty.put
 var get = dotty.get
 
 var Schema = require("./index")
 var property = require("./property")
 
+var deepmerge = DeepMerge(function (a, b) {
+    return [].concat(a, b)
+})
+
 module.exports = bind
 
 function bind(rootElem, input, mapping) {
     var results = parse(rootElem)
+    var elements = results.elements
     mapping = deepmerge(results.mapping, mapping || {})
-    Schema(mapping)(results.elements, input)
-    return results.elements
-}
-
-function deepmerge(target, source) {
-    if (Array.isArray(source) && Array.isArray(target)) {
-        return source.concat(target)
-    } else if (isObject(source) && isObject(target)) {
-        var result = extend({}, target)
-        Object.keys(source).forEach(function (key) {
-            var sourceValue = source[key]
-            var targetValue = target[key]
-
-            if (!(key in target)) {
-                result[key] = sourceValue
-            }
-        })
-
-        return result
-    } else {
-        throw new Error("populate/bind: Trying to merge non objects")
-    }
-}
-
-function isObject(x) {
-    return typeof x === "object" && x !== null
+    Schema(mapping)(elements, input)
+    return elements
 }
 
 function parse(rootElem) {

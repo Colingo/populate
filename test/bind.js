@@ -63,7 +63,7 @@ test("can bind same data to multiple places", function (assert) {
     assert.end()
 })
 
-test.only("can overwrite schema programmatically", function (assert) {
+test("can overwrite schema programmatically", function (assert) {
     var elements = html(nestedTemplate)
     elements = bind(elements.root, {
         message: "hello world"

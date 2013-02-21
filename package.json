@@ -23,7 +23,9 @@
     "data-set": "~0.1.1",
     "dom-walk": "0.0.1",
     "deepmerge": "~0.2.5",
-    "xtend": "~1.0.3"
+    "xtend": "~1.0.3",
+    "process": "~0.5.1",
+    "deep-merge": "~0.1.2"
   },
   "peerDependencies": {
     "reducible": "git://github.com/Raynos/reducible#1.x"
