@@ -24,9 +24,7 @@ function Hash(mapping) {
             var render = definition[key]
 
             if (!render) {
-                throw new Error("populate/hash: There is no " +
-                    "rendering definition for property " + key +
-                    " of data " + inspect(data))
+                return
             }
 
             render(value, elem, elements)
