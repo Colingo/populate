@@ -48,7 +48,7 @@
     "build": "browserify-server --bundle=test/index.js -o test/static/bundle.js --debug",
     "testem": "testem",
     "example": "browservefy ./examples/simple.js --browserify='browserify-server' --live -- --debug --bundle",
-    "testling": "browserify-server --bundle=test/index.js -o test/static/testling-bundle.js --debug",
+    "testling": "browserify-server --bundle=test/index.js -o test/static/testling-bundle.js --debug"
   },
   "testling": {
     "scripts": "test/static/testling-bundle.js",
