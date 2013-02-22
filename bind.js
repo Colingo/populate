@@ -3,10 +3,11 @@ var DataSet = require("data-set")
 var inspect = require("util").inspect
 var dotty = require("dotty")
 var DeepMerge = require("deep-merge")
+var extend = require("xtend")
 var put = dotty.put
 var get = dotty.get
 
-var Schema = require("./index")
+var Schema = require("./schema")
 var property = require("./property")
 
 var deepmerge = DeepMerge(function (a, b) {
@@ -15,9 +16,13 @@ var deepmerge = DeepMerge(function (a, b) {
 
 module.exports = bind
 
-function bind(rootElem, input, mapping) {
-    var results = parse(rootElem)
-    var elements = results.elements
+function bind(elements, input, mapping) {
+    if (!elements.root) {
+        elements = { root: elements }
+    }
+
+    var results = parse(elements.root)
+    var elements = extend({}, elements, results.elements)
     mapping = deepmerge(results.mapping, mapping || {})
     Schema(mapping)(elements, input)
     return elements

@@ -9,7 +9,7 @@ var bind = require("../bind")
 
 test("simple bind", function (assert) {
     var elements = html(simpleTemplate)
-    elements = bind(elements.root, {
+    elements = bind(elements, {
         "img": "http://google.com/"
         , "h1": "two"
         , "span": "three"
@@ -23,7 +23,7 @@ test("simple bind", function (assert) {
 
 test("nested bind", function (assert) {
     var elements = html(nestedTemplate)
-    elements = bind(elements.root, {
+    elements = bind(elements, {
         message: "hello world"
         , author: {
             name: "Jake"
@@ -39,7 +39,7 @@ test("nested bind", function (assert) {
 
 test("comma seperated bind", function (assert) {
     var elements = html(commaTemplate)
-    elements = bind(elements.root, {
+    elements = bind(elements, {
         author: {
             imageUri: "http://google.com/"
         }
@@ -52,7 +52,7 @@ test("comma seperated bind", function (assert) {
 
 test("can bind same data to multiple places", function (assert) {
     var elements = html(multiTemplate)
-    bind(elements.root, {
+    bind(elements, {
         foo: {
             message: "hello"
         }
@@ -65,7 +65,7 @@ test("can bind same data to multiple places", function (assert) {
 
 test("can overwrite schema programmatically", function (assert) {
     var elements = html(nestedTemplate)
-    elements = bind(elements.root, {
+    elements = bind(elements, {
         message: "hello world"
         , author: {
             name: "Jake"

@@ -13,5 +13,7 @@ function Schema(mapping) {
         fold(input, function (data) {
             render(data, elements)
         })
+
+        return elements
     }
 }

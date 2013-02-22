@@ -3,7 +3,7 @@ var html = require("unpack-html")
 
 var simpleTemplate = require("./templates/simple")
 var nestedTemplate = require("./templates/nested")
-var Schema = require("../index")
+var Schema = require("../schema")
 var property = require("../property")
 
 test("schema is a function", function (assert) {
