@@ -1,5 +1,9 @@
 # populate
 
+[![dependency status][3]][4]
+
+[![browser support][5]][6]
+
 Populate DOM elements with data
 
 Populate has two APIs you can use. Either the `Schema` api or the
@@ -154,3 +158,7 @@ document.body.appendChild(elements.root)
 ## MIT Licenced
 
   [1]: https://github.com/Raynos/unpack-html
+  [3]: http://david-dm.org/Colingo/populate.png
+  [4]: http://david-dm.org/Colingo/populate
+  [5]: http://ci.testling.com/Colingo/populate.png
+  [6]: http://ci.testling.com/Colingo/populate
