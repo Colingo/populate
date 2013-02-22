@@ -1,11 +1,30 @@
-module.exports = property
+var get = require("dotty").get
 
-function property(property, name) {
-    return function (value, elem, elements) {
+module.exports = Property
+
+function Property(property, name) {
+    if (typeof property !== "string") {
+        throw new Error("populate/property: property should be a string")
+    }
+
+    var properties = property.
+        split(",").
+        map(function (prop) {
+            return prop === "text" ? "textContent" : prop
+        }).
+        map(function (prop) {
+            return prop.trim()
+        })
+
+    return render
+
+    function render(value, elem, elements) {
         if (name) {
-            elem = elements[name]
+            elem = get(elements, name)
         }
 
-        elem && (elem[property] = value)
+        elem && properties.forEach(function (prop) {
+            elem[prop] = value
+        })
     }
 }

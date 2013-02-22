@@ -1,27 +1,11 @@
-# populate
-
-Populate DOM elements with data
-
-Populate has two APIs you can use. Either the `Schema` api or the
-`bind` API. The `Schema` api allows you define a schema representation
-of how you will populate a group of DOM elements with data.
-
-The `bind` API allows you to embed the `Schema` into the DOM as
-`data-bind` attributes and uses the `Schema` API internally
-
-## Schema example
-
-The idea is that you take a pair of data and DOM elements and
-    apply a mapping from the data onto the DOM.
-
-```html
+var funx = [
+function () {
 <div id="my-template">
     <span data-marker="text"></span>
     <a data-marker="link"> some link! </a>
 </div>
-```
-
-```js
+},
+function () {
 var Schema = require("populate/schema")
 var unpack = require("unpack-element")
 
@@ -38,24 +22,14 @@ populate(elements, {
 })
 
 document.body.appendChild(elements.root)
-```
-
-The above mapping placed the link into the `<a>`'s href property
-    and placed the text into the `<span>`'s textContent.
-
-## bind example
-
-The idea with bind is that you just bind data onto a root Element
-and it will go and parse out all of the `data-bind` attributes
-
-```html
+},
+function () {
 <div id="my-template">
     <span data-bind="text"></span>
     <a data-bind="href:link"> some link! </a>
 </div>
-```
-
-```js
+},
+function () {
 var bind = require("populate/bind")
 
 var rootElem = document.getElementById("my-template").cloneNode(true)
@@ -66,19 +40,8 @@ bind(rootElem, {
 })
 
 document.body.appendChild(rootElem)
-```
-
-## Complex Example
-
-The format of an object of elements allows you to populate
-    multiple elements from a single object of data.
-
-It also works cleanly with the result of [`unpack-html`][1].
-    However using [`unpack-html`][1] is completely optional.
-    Feel free to get references to your DOM elements however
-    you want!
-
-```html
+},
+function () {
 <!-- ./template.html -->
 <div>
     <div data-bind="someText"></div>
@@ -92,9 +55,8 @@ It also works cleanly with the result of [`unpack-html`][1].
         <li>I'm a nested template or something</li>
     </ul>
 </div>
-```
-
-```js
+},
+function () {
 var html = require("unpack-html")
 var bind = require("populate/bind")
 
@@ -132,25 +94,5 @@ bind(elements, data, {
 })
 
 document.body.appendChild(elements.root)
-```
-
-## Advantages
-
- - declaratively describe your data structure
- - declaratively describe how the DOM should be populated
- - uses functions and recursions so is both modular and
-    composable
- - optionally use data binding in your template
- - Works nicely with reducibles
-
-## Installation
-
-`npm install populate`
-
-## Contributors
-
- - Raynos
-
-## MIT Licenced
-
-  [1]: https://github.com/Raynos/unpack-html
+}
+];
