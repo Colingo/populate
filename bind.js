@@ -21,15 +21,15 @@ function bind(elements, input, mapping) {
         elements = { root: elements }
     }
 
-    var results = parse(elements.root)
+    var results = parse(elements.root, elements)
     var elements = extend({}, elements, results.elements)
     mapping = deepmerge(results.mapping, mapping || {})
     Schema(mapping)(elements, input)
     return elements
 }
 
-function parse(rootElem) {
-    var elements = {}
+function parse(rootElem, elements) {
+    var elements = extend({}, elements)
     var mapping = {}
 
     walk([rootElem], function (elem) {
