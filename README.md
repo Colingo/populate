@@ -140,8 +140,6 @@ document.body.appendChild(elements.root)
 
 ## Advantages
 
- - declaratively describe your data structure
- - declaratively describe how the DOM should be populated
  - uses functions and recursions so is both modular and
     composable
  - optionally use data binding in your template
