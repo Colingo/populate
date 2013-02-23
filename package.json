@@ -51,7 +51,7 @@
   },
   "testling": {
     "scripts": "test/static/testling-bundle.js",
-    "preprocess": "browserify-server --bundle=test/index.js -o test/static/testling-bundle.js --debug",
+    "preprocess": "./node_modules/.bin/browserify-server --bundle=test/index.js -o test/static/testling-bundle.js --debug",
     "browsers": {
       "ie": [
         "8",
