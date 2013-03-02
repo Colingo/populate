@@ -24,8 +24,7 @@ function bind(elements, input, mapping) {
     var results = parse(elements.root, elements)
     var elements = extend({}, elements, results.elements)
     mapping = deepmerge(results.mapping, mapping || {})
-    Schema(mapping)(elements, input)
-    return elements
+    return Schema(mapping)(elements, input)
 }
 
 function parse(rootElem, elements) {

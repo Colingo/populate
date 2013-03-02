@@ -1,5 +1,6 @@
 var test = require("tape")
 var html = require("unpack-html")
+var fold = require("reducers/fold")
 
 var simpleTemplate = require("./templates/simple-bind")
 var nestedTemplate = require("./templates/nested-bind")
@@ -9,11 +10,11 @@ var bind = require("../bind")
 
 test("simple bind", function (assert) {
     var elements = html(simpleTemplate)
-    elements = bind(elements, {
+    fold(bind(elements, {
         "img": "http://google.com/"
         , "h1": "two"
         , "span": "three"
-    })
+    }))
 
     assert.equal(elements.img.src, "http://google.com/")
     assert.equal(elements.h1.textContent, "two")
@@ -23,13 +24,13 @@ test("simple bind", function (assert) {
 
 test("nested bind", function (assert) {
     var elements = html(nestedTemplate)
-    elements = bind(elements, {
+    fold(bind(elements, {
         message: "hello world"
         , author: {
             name: "Jake"
             , imageUri: "http://google.com/foobar"
         }
-    })
+    }))
 
     assert.equal(elements.message.textContent, "hello world")
     assert.equal(elements.author.name.textContent, "Jake")
@@ -39,11 +40,11 @@ test("nested bind", function (assert) {
 
 test("comma seperated bind", function (assert) {
     var elements = html(commaTemplate)
-    elements = bind(elements, {
+    fold(bind(elements, {
         author: {
             imageUri: "http://google.com/"
         }
-    })
+    }))
 
     assert.equal(elements.author.imageUri.src, "http://google.com/")
     assert.equal(elements.author.imageUri.title, "http://google.com/")
@@ -52,11 +53,11 @@ test("comma seperated bind", function (assert) {
 
 test("can bind same data to multiple places", function (assert) {
     var elements = html(multiTemplate)
-    bind(elements, {
+    fold(bind(elements, {
         foo: {
             message: "hello"
         }
-    })
+    }))
 
     assert.equal(elements.first.src, "hello")
     assert.equal(elements.second.textContent, "hello")
@@ -65,7 +66,7 @@ test("can bind same data to multiple places", function (assert) {
 
 test("can overwrite schema programmatically", function (assert) {
     var elements = html(nestedTemplate)
-    elements = bind(elements, {
+    fold(bind(elements, {
         message: "hello world"
         , author: {
             name: "Jake"
@@ -79,7 +80,7 @@ test("can overwrite schema programmatically", function (assert) {
         , author: {
             name: "bar"
         }
-    })
+    }))
 
     assert.equal(elements.message.textContent, "hello world")
     assert.equal(elements.author.name.textContent, "Jake")

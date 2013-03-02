@@ -1,5 +1,6 @@
 var test = require("tape")
 var html = require("unpack-html")
+var fold = require("reducers/fold")
 
 var simpleTemplate = require("./templates/simple")
 var nestedTemplate = require("./templates/nested")
@@ -20,11 +21,11 @@ test("can populate data onto schema", function (assert) {
     })
 
     var elements = html(simpleTemplate)
-    schema(elements, {
+    fold(schema(elements, {
         "img": "http://google.com/"
         , "h1": "two"
         , "span": "three"
-    })
+    }))
 
     assert.equal(elements.img.src, "http://google.com/")
     assert.equal(elements.h1.textContent, "two")
@@ -42,13 +43,13 @@ test("can populate nested data onto schema", function (assert) {
     })
 
     var elements = html(nestedTemplate)
-    schema(elements, {
+    fold(schema(elements, {
         message: "hello world"
         , author: {
             name: "Jake"
             , imageUri: "http://google.com/foobar"
         }
-    })
+    }))
 
     assert.equal(elements.message.textContent, "hello world")
     assert.equal(elements.author.name.textContent, "Jake")
@@ -64,11 +65,11 @@ test("can do comma seperated", function (assert) {
     })
 
     var elements = html(nestedTemplate)
-    schema(elements, {
+    fold(schema(elements, {
         author: {
             imageUri: "http://google.com/"
         }
-    })
+    }))
 
     assert.equal(elements.author.imageUri.src, "http://google.com/")
     assert.equal(elements.author.imageUri.title, "http://google.com/")
@@ -88,11 +89,11 @@ test("can do arrays", function (assert) {
     })
 
     var elements = html(nestedTemplate)
-    schema(elements, {
+    fold(schema(elements, {
         author: {
             imageUri: "foobar"
         }
-    })
+    }))
 
     assert.equal(elements.author.imageUri.src, "http://google.com/foobar")
     assert.equal(elements.author.name.textContent, "foobar")

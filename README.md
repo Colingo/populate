@@ -28,6 +28,7 @@ The idea is that you take a pair of data and DOM elements and
 ```js
 var Schema = require("populate/schema")
 var unpack = require("unpack-element")
+var fold = require("reducers/fold")
 
 var populate = Schema({
     text: "textContent"
@@ -36,10 +37,10 @@ var populate = Schema({
 
 var elements = unpack(document.getElementById("my-template").cloneNode(true))
 
-populate(elements, {
+fold(populate(elements, {
     text: "some text goes in span!"
     , link: "http://google.com"
-})
+}))
 
 document.body.appendChild(elements.root)
 ```
@@ -61,13 +62,14 @@ and it will go and parse out all of the `data-bind` attributes
 
 ```js
 var bind = require("populate/bind")
+var fold = require("reducers/fold")
 
 var rootElem = document.getElementById("my-template").cloneNode(true)
 
-bind(rootElem, {
+fold(bind(rootElem, {
     text: "some text goes in span!"
     , link: "http://google.com"
-})
+}))
 
 document.body.appendChild(rootElem)
 ```
@@ -101,6 +103,7 @@ It also works cleanly with the result of [`unpack-html`][1].
 ```js
 var html = require("unpack-html")
 var bind = require("populate/bind")
+var fold = require("reducers/fold")
 
 var template = require("./template.html")
 
@@ -120,7 +123,7 @@ var data = {
     ]
 }
 
-bind(elements, data, {
+fold(bind(elements, data, {
     // Custom logic. Mappings are just functions, do anything
     // you want!
     name: function (value, elem) {
@@ -133,7 +136,7 @@ bind(elements, data, {
             elem.appendChild(clone)
         })
     }
-})
+}))
 
 document.body.appendChild(elements.root)
 ```

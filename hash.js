@@ -1,4 +1,5 @@
 var inspect = require("util").inspect
+var union = require("interset/union")
 
 var Render = require("./render")
 
@@ -18,7 +19,9 @@ function Hash(mapping) {
     return render
 
     function render(data, elements) {
-        Object.keys(data).forEach(function (key) {
+        var keys = union(Object.keys(data), Object.keys(elements))
+
+        keys.forEach(function (key) {
             var value = data[key]
             var elem = elements[key]
             var render = definition[key]

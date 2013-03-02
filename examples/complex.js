@@ -1,6 +1,7 @@
 var html = require("unpack-html")
 var bind = require("../bind")
 var document = require("global/document")
+var fold = require("reducers/fold")
 
 var template = require("./templates/complex.html")
 
@@ -8,7 +9,7 @@ var template = require("./templates/complex.html")
 // You can use something other then unpack-html!
 var elements = html(template)
 
-bind(elements, {
+fold(bind(elements, {
     someText: "this is some text"
     , someLink: "http://google.com"
     , nested: {
@@ -32,6 +33,6 @@ bind(elements, {
             elem.appendChild(clone)
         })
     }
-})
+}))
 
 document.body.appendChild(elements.root)

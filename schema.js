@@ -1,4 +1,4 @@
-var fold = require("reducers/fold")
+var expand = require("reducers/expand")
 
 var Render = require("./render")
 
@@ -10,10 +10,8 @@ function Schema(mapping) {
     return schema
 
     function schema(elements, input) {
-        fold(input, function (data) {
-            render(data, elements)
+        return expand(input, function (data) {
+            return render(data, elements)
         })
-
-        return elements
     }
 }
