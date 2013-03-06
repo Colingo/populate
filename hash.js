@@ -1,4 +1,5 @@
 var inspect = require("util").inspect
+var console = require("console")
 var union = require("interset/union")
 
 var Render = require("./render")
@@ -6,7 +7,7 @@ var Render = require("./render")
 module.exports = Hash
 
 function Hash(mapping) {
-    if (typeof mapping !== "object" || mapping === null) {
+    if (!isObject(mapping)) {
         throw new Error("populate/hash: mapping should be an object")
     }
 
@@ -19,6 +20,16 @@ function Hash(mapping) {
     return render
 
     function render(data, elements) {
+        if (!isObject(data)) {
+            console.warn("render(data, elements)", data, elements)
+            throw new Error("populate/hash: render(data, elements) needs data to render")
+        }
+
+        if (!isObject(elements)) {
+            console.warn("render(data, elements)", data, elements)
+            throw new Error("populate/hash: render(data, elements) needs elements to render")
+        }
+
         var keys = union(Object.keys(data), Object.keys(elements))
 
         keys.forEach(function (key) {
@@ -33,4 +44,8 @@ function Hash(mapping) {
             render(value, elem, elements)
         })
     }
+}
+
+function isObject(x) {
+    return typeof x === "object" && x !== null
 }
