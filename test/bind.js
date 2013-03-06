@@ -16,8 +16,11 @@ test("simple bind", function (assert) {
         , "span": "three"
     }))
 
+    var h1 = elements.span.previousElementSibling
+
+    assert.equal("h1" in elements, false)
     assert.equal(elements.img.src, "http://google.com/")
-    assert.equal(elements.h1.textContent, "two")
+    assert.equal(h1.textContent, "two")
     assert.equal(elements.span.textContent, "three")
     assert.end()
 })
