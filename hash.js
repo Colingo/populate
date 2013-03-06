@@ -22,12 +22,14 @@ function Hash(mapping) {
     function render(data, elements) {
         if (!isObject(data)) {
             console.warn("render(data, elements)", data, elements)
-            throw new Error("populate/hash: render(data, elements) needs data to render")
+            throw new Error("populate/hash: render(data, elements)" +
+                " needs data to render")
         }
 
         if (!isObject(elements)) {
             console.warn("render(data, elements)", data, elements)
-            throw new Error("populate/hash: render(data, elements) needs elements to render")
+            throw new Error("populate/hash: render(data, elements)" +
+                " needs elements to render")
         }
 
         var keys = union(Object.keys(data), Object.keys(elements))
