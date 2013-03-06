@@ -14,6 +14,10 @@ var deepmerge = DeepMerge(function (a, b) {
     return [].concat(a, b)
 })
 
+var deepcopy = DeepMerge(function (a, b) {
+    return b
+})
+
 module.exports = bind
 
 function bind(elements, input, mapping) {
@@ -21,8 +25,10 @@ function bind(elements, input, mapping) {
         elements = { root: elements }
     }
 
+    elements = deepcopy({}, elements)
+
     var results = parse(elements.root, elements)
-    var elements = extend({}, elements, results.elements)
+    elements = extend(elements, results.elements)
     mapping = deepmerge(results.mapping, mapping || {})
     return Schema(mapping)(elements, input)
 }
