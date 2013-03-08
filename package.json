@@ -36,7 +36,8 @@
     "browservefy": "https://github.com/raynos/browservefy/tarball/master",
     "testem": "https://github.com/raynos/testem/tarball/master",
     "reducible": "git://github.com/Raynos/reducible#1.x",
-    "global": "~0.1.5"
+    "global": "~0.1.5",
+    "event": "~1.0.0"
   },
   "licenses": [
     {

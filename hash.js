@@ -32,7 +32,8 @@ function Hash(mapping) {
                 " needs elements to render")
         }
 
-        var keys = union(Object.keys(data), Object.keys(elements))
+        // var keys = union(Object.keys(data), Object.keys(elements))
+        var keys = Object.keys(data)
 
         keys.forEach(function (key) {
             var value = data[key]
