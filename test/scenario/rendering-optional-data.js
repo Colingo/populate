@@ -8,7 +8,7 @@ var fold = require("reducers/fold")
 var bind = require("../../bind")
 
 var template = "\
-    <div data-bind='foo.bar'>\
+    <div data-bind='foo.bar'></div>\
     "
 
 test("populate can render optional data", function (assert) {
