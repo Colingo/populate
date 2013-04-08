@@ -17,7 +17,7 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
-    "reducers": "git://github.com/Raynos/reducers",
+    "reducers": "Raynos/reducers#dedup",
     "dotty": "0.0.1",
     "data-set": "~0.1.1",
     "dom-walk": "0.0.1",
@@ -25,9 +25,6 @@
     "process": "~0.5.1",
     "deep-merge": "~0.1.2",
     "interset": "0.0.1"
-  },
-  "peerDependencies": {
-    "reducible": "git://github.com/Raynos/reducible#1.x"
   },
   "devDependencies": {
     "tape": "~0.2.2",
