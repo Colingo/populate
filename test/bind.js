@@ -1,6 +1,5 @@
 var test = require("tape")
 var html = require("unpack-html")
-var fold = require("reducers/fold")
 
 var simpleTemplate = require("./templates/simple-bind")
 var nestedTemplate = require("./templates/nested-bind")
@@ -10,11 +9,11 @@ var bind = require("../bind")
 
 test("simple bind", function (assert) {
     var elements = html(simpleTemplate)
-    fold(bind(elements, {
+    bind({
         "img": "http://google.com/"
         , "h1": "two"
         , "span": "three"
-    }))
+    }, elements)
 
     var h1 = elements.span.previousElementSibling
 
@@ -27,13 +26,13 @@ test("simple bind", function (assert) {
 
 test("nested bind", function (assert) {
     var elements = html(nestedTemplate)
-    fold(bind(elements, {
+    bind({
         message: "hello world"
         , author: {
             name: "Jake"
             , imageUri: "http://google.com/foobar"
         }
-    }))
+    }, elements)
 
     assert.equal(elements.message.textContent, "hello world")
     assert.equal(elements.author.name.textContent, "Jake")
@@ -43,11 +42,11 @@ test("nested bind", function (assert) {
 
 test("comma seperated bind", function (assert) {
     var elements = html(commaTemplate)
-    fold(bind(elements, {
+    bind({
         author: {
             imageUri: "http://google.com/"
         }
-    }))
+    }, elements)
 
     assert.equal(elements.author.imageUri.src, "http://google.com/")
     assert.equal(elements.author.imageUri.title, "http://google.com/")
@@ -56,11 +55,11 @@ test("comma seperated bind", function (assert) {
 
 test("can bind same data to multiple places", function (assert) {
     var elements = html(multiTemplate)
-    fold(bind(elements, {
+    bind({
         foo: {
             message: "hello"
         }
-    }))
+    }, elements)
 
     assert.equal(elements.first.src, "hello")
     assert.equal(elements.second.textContent, "hello")
@@ -69,13 +68,13 @@ test("can bind same data to multiple places", function (assert) {
 
 test("can overwrite schema programmatically", function (assert) {
     var elements = html(nestedTemplate)
-    fold(bind(elements, {
+    bind({
         message: "hello world"
         , author: {
             name: "Jake"
             , imageUri: "http://google.com/foobar"
         }
-    }, {
+    }, elements, {
         message: function (value, elem, elements) {
             // console.log("called?", elements.author.name.foo, value)
             elements.author.name.foo = value
@@ -83,7 +82,7 @@ test("can overwrite schema programmatically", function (assert) {
         , author: {
             name: "bar"
         }
-    }))
+    })
 
     assert.equal(elements.message.textContent, "hello world")
     assert.equal(elements.author.name.textContent, "Jake")

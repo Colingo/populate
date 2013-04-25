@@ -7,8 +7,8 @@ var extend = require("xtend")
 var put = dotty.put
 var get = dotty.get
 
-var Schema = require("./schema")
 var property = require("./property")
+var Render = require("./render")
 
 var deepmerge = DeepMerge(function (a, b) {
     return [].concat(a, b)
@@ -16,7 +16,7 @@ var deepmerge = DeepMerge(function (a, b) {
 
 module.exports = bind
 
-function bind(elements, input, mapping) {
+function bind(data, elements, mapping) {
     if (!elements.root) {
         elements = { root: elements }
     }
@@ -26,7 +26,7 @@ function bind(elements, input, mapping) {
     var results = parse(elements.root, elements)
     elements = extend(elements, results.elements)
     mapping = deepmerge(results.mapping, mapping || {})
-    return Schema(mapping)(elements, input)
+    return Render(mapping)(data, elements)
 }
 
 function deepcopy(x) {

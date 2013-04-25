@@ -3,9 +3,6 @@
 
 var test = require("tape")
 var html = require("unpack-html")
-var fold = require("reducers/fold")
-var event = require("event")
-var send = require("event/send")
 
 var bind = require("../../bind")
 
@@ -21,9 +18,8 @@ var template = "\
 test("populate does the correct thing with partial data"
     , function (assert) {
         var elem = html(template).root
-        var bus = event()
 
-        fold(bind(elem, bus))
+        bind({}, elem)
 
         assert.deepEqual(correctText(elem), {
             one: ""
@@ -36,11 +32,11 @@ test("populate does the correct thing with partial data"
             }
         })
 
-        send(bus, {
+        bind({
             one: "one1"
             , two: "two1"
             , three: {}
-        })
+        }, elem)
 
         assert.deepEqual(correctText(elem), {
             one: "one1"
@@ -53,11 +49,11 @@ test("populate does the correct thing with partial data"
             }
         })
 
-        send(bus, {
+        bind({
             three: {
                 four: "four1"
             }
-        })
+        }, elem)
 
         assert.deepEqual(correctText(elem), {
             one: "one1"
@@ -70,14 +66,14 @@ test("populate does the correct thing with partial data"
             }
         })
 
-        send(bus, {
+        bind({
             one: "one2"
             , three: {
                 five: {
                     six: "six1"
                 }
             }
-        })
+        }, elem)
 
         assert.deepEqual(correctText(elem), {
             one: "one2"

@@ -17,7 +17,6 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
-    "reducers": "Raynos/reducers#dedup",
     "dotty": "0.0.1",
     "data-set": "~0.1.1",
     "dom-walk": "0.0.1",
@@ -32,9 +31,7 @@
     "unpack-html": "~1.0.3",
     "browservefy": "https://github.com/raynos/browservefy/tarball/master",
     "testem": "https://github.com/raynos/testem/tarball/master",
-    "reducible": "git://github.com/Raynos/reducible#1.x",
-    "global": "~0.1.5",
-    "event": "~1.0.0"
+    "global": "~0.1.5"
   },
   "licenses": [
     {

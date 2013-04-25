@@ -3,7 +3,6 @@
 
 var test = require("tape")
 var html = require("unpack-html")
-var fold = require("reducers/fold")
 
 var bind = require("../../bind")
 
@@ -13,11 +12,11 @@ var template = "\
 
 test("populate can render optional data", function (assert) {
     var elements = html(template)
-    fold(bind(elements, {
+    bind({
         foo: {
             bar: "text"
         }
-    }))
+    }, elements)
 
     assert.equal(elements.root.textContent, "text")
 
@@ -28,9 +27,9 @@ test("populate does not break when data is not present"
     , function (assert) {
         var elements = html(template)
 
-        fold(bind(elements, {
+        bind({
             bar: "this does not get rendered"
-        }))
+        }, elements)
 
         assert.ok(true)
 
